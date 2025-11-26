@@ -24,7 +24,8 @@ namespace Company.Cart.DAL.LiteDb
 
         public Task<Company.Cart.Core.Models.Cart?> GetCartAsync(string cartId)
         {
-            return Task.FromResult(_collection.FindById(new BsonValue(cartId)));
+            var cart = _collection.FindById(new BsonValue(cartId));
+            return Task.FromResult(cart != null ? cart : null);
         }
 
         public Task<IEnumerable<CartItem>> GetCartItemsAsync(string cartId)
@@ -67,6 +68,17 @@ namespace Company.Cart.DAL.LiteDb
         public Task DeleteCartAsync(string cartId)
         {
             _collection.Delete(new BsonValue(cartId));
+            return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<Company.Cart.Core.Models.Cart>> GetAllCartsAsync()
+        {
+            return Task.FromResult(_collection.FindAll().ToList() as IEnumerable<Company.Cart.Core.Models.Cart>);
+        }
+
+        public Task AddOrUpdateCartAsync(Company.Cart.Core.Models.Cart cart)
+        {
+            _collection.Upsert(cart);
             return Task.CompletedTask;
         }
     }

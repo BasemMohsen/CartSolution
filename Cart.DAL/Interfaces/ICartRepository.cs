@@ -14,5 +14,7 @@ namespace Company.Cart.DAL.Interfaces
         Task AddOrUpdateItemAsync(string cartId, CartItem item);
         Task RemoveItemAsync(string cartId, int itemId);
         Task DeleteCartAsync(string cartId);
+        Task<IEnumerable<Company.Cart.Core.Models.Cart>> GetAllCartsAsync();
+        Task AddOrUpdateCartAsync(Company.Cart.Core.Models.Cart cart);
     }
 }

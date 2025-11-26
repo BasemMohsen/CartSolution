@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Company.Cart.BLL.Interfaces;
+using Cart.BLL.Interfaces;
 using Company.Cart.Core.Models;
 using CartModel = Company.Cart.Core.Models.Cart;
 

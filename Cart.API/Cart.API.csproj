@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.20.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
@@ -17,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cart.BLL\Cart.BLL.csproj" />
     <ProjectReference Include="..\Cart.DAL\Cart.DAL.csproj" />
+    <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
   </ItemGroup>
 
 </Project>
