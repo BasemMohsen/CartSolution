@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
 using Cart.BLL.Interfaces;
 using Company.Cart.Core.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using CartModel = Company.Cart.Core.Models.Cart;
 
 namespace Cart.API.Controllers
@@ -25,6 +26,7 @@ namespace Cart.API.Controllers
         /// <returns>Cart model or list of cart items</returns>
         [HttpGet("v1/{cartId}")]
         [MapToApiVersion("1.0")]
+        [Authorize(Policy = "BothRoles")]
         public async Task<ActionResult<CartModel>> GetCartV1(string cartId)
         {
             var items = await _cartService.GetItemsAsync(cartId);
@@ -38,6 +40,7 @@ namespace Cart.API.Controllers
         /// <returns>List of cart items</returns>
         [HttpGet("v2/{cartId}")]
         [MapToApiVersion("2.0")]
+        [Authorize(Policy = "BothRoles")]
         public async Task<ActionResult<IEnumerable<CartItem>>> GetCartV2(string cartId)
         {
             var items = await _cartService.GetItemsAsync(cartId);
@@ -51,6 +54,7 @@ namespace Cart.API.Controllers
         /// <param name="item">Cart item model</param>
         /// <returns>Status code</returns>
         [HttpPost("{cartId}/items")]
+        [Authorize(Policy = "BothRoles")]
         public async Task<IActionResult> AddItem(string cartId, [FromBody] CartItem item)
         {
             await _cartService.AddItemAsync(cartId, item);
@@ -64,6 +68,7 @@ namespace Cart.API.Controllers
         /// <param name="itemId">Item ID</param>
         /// <returns>Status code</returns>
         [HttpDelete("{cartId}/items/{itemId}")]
+        [Authorize(Policy = "BothRoles")]
         public async Task<IActionResult> DeleteItem(string cartId, int itemId)
         {
             var result = await _cartService.RemoveItemAsync(cartId, itemId);
